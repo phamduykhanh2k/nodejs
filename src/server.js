@@ -3,19 +3,31 @@ require('dotenv').config()
 const { render } = require('ejs')
 const express = require('express')
 const app = express()
-const configViewEngine = require('./config/viewEngine')
-const webRouter = require('./routes/web')
+const apiRouters = require('./routes/api')
+const connection = require('./config/database')
+const User = require('./models/User')
+var cors = require('cors');
+
 
 const port = process.env.PORT || 8081
 const hostname = process.env.HOST_NANME
 
-configViewEngine(app)
-
 app.use(express.json()); // Used to parse JSON bodies
 app.use(express.urlencoded()); //Parse URL-encoded bodies
 
-app.use('/', webRouter)
+app.use(cors());
+app.use('/v1/api/', apiRouters);
 
-app.listen(port, hostname, () => {
-    console.log(`Example app listening on port ${port}`)
-})
+(async () => {
+    try {
+        await connection();
+
+        app.listen(port, hostname, () => {
+            console.log(`Example app listening on port ${port}`)
+        })
+    } catch (error) {
+        console.log('Check connect to DB: ', error)
+    }
+})()
+
+

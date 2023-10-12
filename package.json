@@ -13,10 +13,15 @@
   "author": "Miel",
   "license": "ISC",
   "dependencies": {
+    "api-query-params": "^5.4.0",
+    "cors": "^2.8.5",
     "dotenv": "16.1.4",
     "ejs": "3.1.9",
     "express": "4.18.2",
-    "mysql2": "^3.3.3"
+    "mongoose": "^7.3.0",
+    "mongoose-delete": "^1.0.1",
+    "mysql2": "^3.3.3",
+    "query-string": "^8.1.0"
   },
   "devDependencies": {
     "nodemon": "2.0.22"
